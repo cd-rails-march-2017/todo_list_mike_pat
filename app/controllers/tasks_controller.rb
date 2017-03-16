@@ -17,7 +17,7 @@ class TasksController < ApplicationController
 
   def update
     task = Task.find(params[:id])
-    task.complete.toggle!
+    task.toggle!(:complete)
     redirect_to "/"
   end
 end

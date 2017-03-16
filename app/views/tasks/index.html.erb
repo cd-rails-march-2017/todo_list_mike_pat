@@ -5,9 +5,11 @@
       <% @tasks.each do |task| %>
         <tr>
           <td>
-            <form method="patch" action="/tasks/<%= task.id %>">
-                <input type="checkbox" name="show" <% if task.complete %> checked <% end %>>
-                <input type="submit" value="submit">
+            <form method="post" action="/tasks/<%= task.id %>">
+              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+              <input name="_method" type="hidden" value="patch"/>
+              <input type="checkbox" name="show" <% if task.complete %> checked <% end %>>
+              <input type="submit" value="submit">
             </form>
           </td>
           <td><%= task.item %></td>
