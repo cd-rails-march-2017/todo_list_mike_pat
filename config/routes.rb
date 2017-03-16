@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   post '/users' => 'users#create'
 
   post '/logout' => 'users#logout'
+
+  post '/show_hide' => 'tasks#show_hide'
 end

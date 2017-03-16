@@ -1,12 +1,21 @@
 class TasksController < ApplicationController
+  @@show_all ||= true
   def index
+    @show_all = @@show_all
     if session[:user_id]
-      @tasks = Task.where('user_id = ?',session[:user_id]).order('due_date')
+      if @@show_all
+        @tasks = Task.where('user_id = ?',session[:user_id]).order('due_date')
+      else
+        @tasks = Task.where('user_id = ? AND complete = ?',session[:user_id], false).order('due_date')
+      end
     else
       redirect_to '/login'
     end
   end
-
+  def show_hide
+    @@show_all= !@@show_all
+    redirect_to '/'
+  end
   def new
   end
 
