@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   def index
     if session[:user_id]
-      @tasks = Task.where('user_id = ?',session[:user_id]).order('due_date DESC')
+      @tasks = Task.where('user_id = ?',session[:user_id]).order('due_date')
     else
       redirect_to '/login'
     end
@@ -12,7 +12,8 @@ class TasksController < ApplicationController
 
   def create
     if session[:user_id]
-      Task.create(item: params[:item], due_date: params[:due_date], user_id: session[:user_id])
+      task = Task.create(item: params[:item], due_date: params[:due_date], user_id: session[:user_id])
+      puts "HELOOO #{task.errors.inspect}"
       redirect_to "/"
     else
       flash[:error] = ["Need to Log in"]

@@ -17,9 +17,9 @@ ActiveRecord::Schema.define(version: 20170316182737) do
     t.string   "item"
     t.date     "due_date"
     t.integer  "user_id"
-    t.boolean  "complete"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "complete",   default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_index "tasks", ["user_id"], name: "index_tasks_on_user_id"
