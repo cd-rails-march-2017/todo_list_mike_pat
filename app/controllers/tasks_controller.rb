@@ -1,6 +1,10 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.find_by_user_id(session[:user_id]).order('due_date DESC')
+    if session[:user_id]
+      @tasks = Task.where('user_id = ?',session[:user_id]).order('due_date DESC')
+    else
+      redirect_to '/login'
+    end
   end
 
   def new

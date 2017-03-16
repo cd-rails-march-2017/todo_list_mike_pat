@@ -10,7 +10,7 @@ class UsersController < ApplicationController
         session[:username] = user.username
         redirect_to "/"
       else
-        flash[:error] = "Incorrect Password"
+        flash[:error] = ["Incorrect Password"]
         redirect_to "/login"
       end
     else
@@ -24,6 +24,11 @@ class UsersController < ApplicationController
         redirect_to "/"
       end
     end
+  end
+  
+  def logout
+    reset_session
+    redirect_to '/login'
   end
 
 end
