@@ -11,8 +11,13 @@ class TasksController < ApplicationController
   end
 
   def create
-    Task.create(task: params[:task], due_date: params[:due_date])
-    redirect_to "/"
+    if session[:user_id]
+      Task.create(item: params[:item], due_date: params[:due_date], user_id: session[:user_id])
+      redirect_to "/"
+    else
+      flash[:error] = ["Need to Log in"]
+      redirect_to '/login'
+    end
   end
 
   def update
